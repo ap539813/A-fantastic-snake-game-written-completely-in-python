@@ -2,7 +2,7 @@
 This repository contains the source code for the snake game made by me,in future I am planning to automate this game using various AI techniques.
 
 
-You can check out my video of this game: https://www.youtube.com/watch?v=5tvER0MT14s&t=2s
+You can check out my video of this game: https://youtu.be/5le52i-jP4k
 
 # Requirements
 - Python 3.x
