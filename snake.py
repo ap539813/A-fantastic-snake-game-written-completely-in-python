@@ -10,11 +10,13 @@ screen_height = 900
 gameWindow = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("snake game")
 carImg = pygame.image.load('apple.png')
+overImg = pygame.image.load('tenor.gif')
+welcm = pygame.image.load('welcome_page.png')
 green = (1, 50, 32)
 
 
 # Game specific variables
-
+start_on = True
 
 
 def start_game():
@@ -31,10 +33,11 @@ def start_game():
     head = [[snake_x, snake_y]]
     snake_len = 1
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont(None, 30)
-    return exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font
+    font = pygame.font.SysFont("Snake Chan", 29)
+    font2 = pygame.font.SysFont("Snake Chan", 45)
+    return exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2
 
-exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font = start_game()
+exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2 = start_game()
 def plot_snake(gameWindow, head, snake_width):
     pygame.draw.circle(gameWindow, green, [head[-1][0] + snake_width//2, head[-1][1] + snake_width//2], snake_width//2 + 1)
     if snake_len//3 < snake_width//2:
@@ -54,7 +57,7 @@ def plot_snake(gameWindow, head, snake_width):
         pygame.draw.circle(gameWindow, (255, 255, 255), [head[-1][0] + snake_width//2, head[-1][1] + snake_width//2 - 3], 2)
         pygame.draw.circle(gameWindow, (255, 255, 255), [head[-1][0] + snake_width//2, head[-1][1] + snake_width//2 + 3], 2)
 
-def put_text(text, color, x, y):
+def put_text(text, color, x, y, font):
     text_screen = font.render(text, True, color)
     gameWindow.blit(text_screen, [x, y])
 
@@ -63,6 +66,16 @@ with open("high_score.txt", "r") as f:
 # Creating a game loop
 sound1 = pygame.mixer.Sound('bite.wav')
 while not exit_game:
+    while start_on:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit_game = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    start_on = False
+        gameWindow.blit(welcm, (0, 0))
+        pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit_game = True
@@ -108,10 +121,10 @@ while not exit_game:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font = start_game()
+                        exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2 = start_game()
                         gameWindow.fill((255, 255, 255))
-                        put_text('score : ' + str(snake_len - 1), (0, 0, 0), 10, 10)
-                        put_text('highest score : ' + str(high_score), (0, 0, 0), 450, 10)
+                        put_text('score : ' + str(snake_len - 1), green, 10, 10, font)
+                        put_text('highest score : ' + str(high_score), green, 450, 10, font)
                         pygame.draw.line(gameWindow, (0, 0, 0), (0, 60), (900, 60), 5)
                         gameWindow.blit(carImg, (food_pos[0], food_pos[1]))
                         plot_snake(gameWindow, head, snake_width)
@@ -124,10 +137,12 @@ while not exit_game:
                         exit()
             pygame.display.update()
             clock.tick(FPS)
-            put_text('Game over : press ENTER to restart / any other key to quit', (0, 0, 0), 200, 450)
+            gameWindow.blit(overImg, (340, 180))
+            put_text('Game over', green, 300, 400, font2)
+            put_text('press ENTER to restart or any other key', green, 20, 500, font)
         # break
-    put_text('score : ' + str(snake_len - 1), (0, 0, 0), 10, 10)
-    put_text('highest score : ' + str(high_score), (0, 0, 0), 450, 10)
+    put_text('score : ' + str(snake_len - 1), green, 10, 10, font)
+    put_text('highest score : ' + str(high_score), green, 450, 10, font)
     pygame.draw.line(gameWindow, (0, 0, 0), (0, 60), (900, 60), 5)
     gameWindow.blit(carImg, (food_pos[0], food_pos[1]))
     plot_snake(gameWindow, head, snake_width)
