@@ -1,41 +1,41 @@
-import pygame
 import random
+import pygame
+
+from important_variables import screen_width, screen_height, gameWindow, green
+from assets import carImg, overImg, welcm
+
+from game import start_game
+
 pygame.init()
 
 pygame.mixer.init()
 # creating window
 
-screen_width = 900
-screen_height = 900
-gameWindow = pygame.display.set_mode((screen_width, screen_height))
+
 pygame.display.set_caption("snake game")
-carImg = pygame.image.load('apple.png')
-overImg = pygame.image.load('tenor.gif')
-welcm = pygame.image.load('welcome_page.png')
-green = (1, 50, 32)
 
 
 # Game specific variables
 start_on = True
 
 
-def start_game():
-    pygame.mixer.music.load('media.io_background.wav')
-    pygame.mixer.music.play(20)
-    exit_game = False
-    game_over = False
-    snake_x = 100
-    snake_y = 100
-    snake_width = 20
-    FPS = 60
-    snake_mv = 'r'
-    food_pos = (random.randint(1, 880), random.randint(70, 880))
-    head = [[snake_x, snake_y]]
-    snake_len = 1
-    clock = pygame.time.Clock()
-    font = pygame.font.SysFont("Snake Chan", 29)
-    font2 = pygame.font.SysFont("Snake Chan", 45)
-    return exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2
+# def start_game():
+#     pygame.mixer.music.load('media.io_background.wav')
+#     pygame.mixer.music.play(20)
+#     exit_game = False
+#     game_over = False
+#     snake_x = 100
+#     snake_y = 100
+#     snake_width = 20
+#     FPS = 60
+#     snake_mv = 'r'
+#     food_pos = (random.randint(1, 880), random.randint(70, 880))
+#     head = [[snake_x, snake_y]]
+#     snake_len = 1
+#     clock = pygame.time.Clock()
+#     font = pygame.font.SysFont("Snake Chan", 29)
+#     font2 = pygame.font.SysFont("Snake Chan", 45)
+#     return exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2
 
 exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2 = start_game()
 def plot_snake(gameWindow, head, snake_width):
