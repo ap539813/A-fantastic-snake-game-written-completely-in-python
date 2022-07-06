@@ -1,7 +1,7 @@
 import random
 import pygame
 
-from important_variables import screen_width, screen_height, gameWindow, green
+from important_variables import screen_width, screen_height, gameWindow, green, score_board_size, apple_width
 from assets import carImg, overImg, welcm
 
 
@@ -102,11 +102,11 @@ while not exit_game:
         snake_y += 4
 
 
-    if snake_x in range(food_pos[0], food_pos[0] + 40) and snake_y in range(food_pos[1], food_pos[1] + 40):
+    if snake_x in range(food_pos[0], food_pos[0] + apple_width) and snake_y in range(food_pos[1], food_pos[1] + apple_width):
         snake_len += 1
         sound1.play()
         head.append([snake_x, snake_y])
-        food_pos = (random.randint(1, screen_height-snake_width), random.randint(70, screen_width-snake_width))
+        food_pos = (random.randint(1, screen_width-snake_width), random.randint(score_board_size + 10, screen_height-snake_width))
     else:
         # if len(head) > snake_len:
         head.append([snake_x, snake_y])
@@ -114,7 +114,7 @@ while not exit_game:
     gameWindow.fill((255, 255, 255))
     if snake_len - 1 > high_score:
         high_score = snake_len - 1
-    if head[-1][0] >= screen_height or head[-1][0] <= 1 or head[-1][1] >= screen_width or head[-1][1] <= 60 or head[-1] in head[:-1]:
+    if head[-1][0] >= screen_height or head[-1][0] <= 1 or head[-1][1] >= screen_width or head[-1][1] <= score_board_size or head[-1] in head[:-1]:
         pygame.mixer.music.load('over.mp3')
         pygame.mixer.music.play()
         with open("high_score.txt", "w") as f:
@@ -128,7 +128,7 @@ while not exit_game:
                         gameWindow.fill((255, 255, 255))
                         put_text('score : ' + str(snake_len - 1), green, 10, 10, font, gameWindow)
                         put_text('highest score : ' + str(high_score), green, screen_width//2, 10, font, gameWindow)
-                        pygame.draw.line(gameWindow, (0, 0, 0), (0, 60), (900, 60), 5)
+                        pygame.draw.line(gameWindow, (0, 0, 0), (0, score_board_size), (screen_width, score_board_size), 5)
                         gameWindow.blit(carImg, (food_pos[0], food_pos[1]))
                         plot_snake(gameWindow, head, snake_width, green, snake_len, snake_mv)
                         pygame.display.update()
@@ -146,7 +146,7 @@ while not exit_game:
         # break
     put_text('score : ' + str(snake_len - 1), green, 10, 10, font, gameWindow)
     put_text('highest score : ' + str(high_score), green, 450, 10, font, gameWindow)
-    pygame.draw.line(gameWindow, (0, 0, 0), (0, 60), (900, 60), 5)
+    pygame.draw.line(gameWindow, (0, 0, 0), (0, score_board_size), (900, score_board_size), 5)
     gameWindow.blit(carImg, (food_pos[0], food_pos[1]))
     plot_snake(gameWindow, head, snake_width, green, snake_len, snake_mv)
     pygame.display.update()
