@@ -1,10 +1,11 @@
 import pygame
 import random
 
-from important_variables import screen_width, screen_height, score_board_size
+from important_variables import screen_width, screen_height, score_board_size, apple_width
+from paths import background_sound
 
 def start_game():
-    pygame.mixer.music.load('asset/media.io_background.wav')
+    pygame.mixer.music.load(background_sound)
     pygame.mixer.music.play(20)
     exit_game = False
     game_over = False
@@ -13,7 +14,7 @@ def start_game():
     snake_width = screen_width//45
     FPS = 60
     snake_mv = 'r'
-    food_pos = (random.randint(1, screen_width-snake_width), random.randint(score_board_size + 10, screen_height-snake_width))
+    food_pos = (random.randint(1, screen_width-apple_width), random.randint(score_board_size + 10, screen_height-apple_width))
     head = [[snake_x, snake_y]]
     snake_len = 1
     clock = pygame.time.Clock()
