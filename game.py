@@ -4,7 +4,7 @@ import random
 from important_variables import screen_width, screen_height, score_board_size
 
 def start_game():
-    pygame.mixer.music.load('media.io_background.wav')
+    pygame.mixer.music.load('asset/media.io_background.wav')
     pygame.mixer.music.play(20)
     exit_game = False
     game_over = False
