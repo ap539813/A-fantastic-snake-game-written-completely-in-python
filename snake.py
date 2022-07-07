@@ -15,7 +15,7 @@ pygame.mixer.init()
 # creating window
 
 
-pygame.display.set_caption("snake game")
+pygame.display.set_caption("Snake Game")
 
 
 # Game specific variables
@@ -67,7 +67,7 @@ exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, he
 with open("high_score.txt", "r") as f:
     high_score = int(f.read())
 # Creating a game loop
-sound1 = pygame.mixer.Sound('bite.wav')
+sound1 = pygame.mixer.Sound('asset/bite.wav')
 while not exit_game:
     while start_on:
         for event in pygame.event.get():
@@ -115,7 +115,7 @@ while not exit_game:
     if snake_len - 1 > high_score:
         high_score = snake_len - 1
     if head[-1][0] >= screen_height or head[-1][0] <= 1 or head[-1][1] >= screen_width or head[-1][1] <= score_board_size or head[-1] in head[:-1]:
-        pygame.mixer.music.load('over.mp3')
+        pygame.mixer.music.load('asset/over.mp3')
         pygame.mixer.music.play()
         with open("high_score.txt", "w") as f:
             f.write(str(high_score))
