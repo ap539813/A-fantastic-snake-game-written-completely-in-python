@@ -7,7 +7,7 @@ except:
     import os
     os.system('pip install pygame')
 
-from important_variables import screen_width, screen_height, gameWindow, colour as color, score_board_size, apple_width
+from important_variables import screen_width, screen_height, gameWindow, snake_colour, text_colour, score_board_size, apple_width
 from assets import appleImg, overImg, welcm
 from paths import score_file, bite_sound, game_over_sound
 
@@ -71,7 +71,7 @@ while not exit_game:
         snake_y += 4
 
 
-    if snake_x in range(food_pos[0], food_pos[0] + apple_width) and snake_y in range(food_pos[1], food_pos[1] + apple_width):
+    if (snake_x + snake_width//2) in range(food_pos[0], food_pos[0] + apple_width) and (snake_y + snake_width//2) in range(food_pos[1], food_pos[1] + apple_width):
         snake_len += 1
         sound1.play()
         head.append([snake_x, snake_y])
@@ -97,11 +97,11 @@ while not exit_game:
                         exit_game, game_over, snake_x, snake_y, snake_width, FPS, snake_mv, food_pos, head, snake_len, clock, font, font2 = start_game()
                         # gameWindow.fill((255, 255, 255))
                         draw_background(gameWindow)
-                        put_text('score : ' + str(snake_len - 1), color, 10, 10, font, gameWindow)
-                        put_text('highest score : ' + str(high_score), color, screen_width//2, 10, font, gameWindow)
+                        put_text('score : ' + str(snake_len - 1), snake_colour, 10, 10, font, gameWindow)
+                        put_text('highest score : ' + str(high_score), snake_colour, screen_width//2, 10, font, gameWindow)
                         pygame.draw.line(gameWindow, (0, 0, 0), (0, score_board_size), (screen_width, score_board_size), 5)
                         gameWindow.blit(appleImg, (food_pos[0], food_pos[1]))
-                        plot_snake(gameWindow, head, snake_width, color, snake_len, snake_mv)
+                        plot_snake(gameWindow, head, snake_width, snake_colour, snake_len, snake_mv)
                         pygame.display.update()
                         clock.tick(FPS)
                         game_over = False
@@ -112,14 +112,14 @@ while not exit_game:
             pygame.display.update()
             clock.tick(FPS)
             gameWindow.blit(overImg, ((screen_width - 220)//2, 180))
-            put_text('Game over', color, 200, 400, font2, gameWindow)
-            put_text('press ENTER to restart or any other key', color, 20, 500, font, gameWindow)
+            put_text('Game over', text_colour, 200, 400, font2, gameWindow)
+            put_text('press ENTER to restart or any other key', text_colour, 20, 500, font, gameWindow)
         # break
-    put_text('score : ' + str(snake_len - 1), color, 10, 10, font, gameWindow)
-    put_text('highest score : ' + str(high_score), color, screen_width//2, 10, font, gameWindow)
+    put_text('score : ' + str(snake_len - 1), snake_colour, 10, 10, font, gameWindow)
+    put_text('highest score : ' + str(high_score), snake_colour, screen_width//2, 10, font, gameWindow)
     pygame.draw.line(gameWindow, (0, 0, 0), (0, score_board_size), (900, score_board_size), 5)
     gameWindow.blit(appleImg, (food_pos[0], food_pos[1]))
-    plot_snake(gameWindow, head, snake_width, color, snake_len, snake_mv)
+    plot_snake(gameWindow, head, snake_width, snake_colour, snake_len, snake_mv)
     pygame.display.update()
     clock.tick(FPS)
 pygame.quit()
