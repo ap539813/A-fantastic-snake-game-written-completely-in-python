@@ -47,3 +47,7 @@ def draw_background(gameWindow):
     gameWindow.blit(sg, (0, 0))
     bg = pygame.image.load(game_background)
     gameWindow.blit(bg, (0, 60))
+
+def game_over_page(gameWindow):
+    sg = pygame.image.load(score_board)
+    gameWindow.blit(sg, (0, 0))

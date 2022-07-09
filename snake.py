@@ -12,7 +12,7 @@ from assets import appleImg, overImg, welcm
 from paths import score_file, bite_sound, game_over_sound
 
 
-from visuals import put_text, plot_snake, draw_background
+from visuals import put_text, plot_snake, draw_background, game_over_page
 
 from game import start_game
 
@@ -111,9 +111,10 @@ while not exit_game:
                         exit()
             pygame.display.update()
             clock.tick(FPS)
-            gameWindow.blit(overImg, ((screen_width - 220)//2, 180))
-            put_text('Game over', text_colour, 200, 400, font2, gameWindow)
-            put_text('press ENTER to restart or any other key', text_colour, 20, 500, font, gameWindow)
+            game_over_page(gameWindow)
+            gameWindow.blit(overImg, ((screen_width - 540)//2, 30))
+            put_text('Game over', snake_colour, 200, 540, font2, gameWindow)
+            put_text('press ENTER to restart or any other key', snake_colour, 20, 600, font, gameWindow)
         # break
     put_text('score : ' + str(snake_len - 1), snake_colour, 10, 10, font, gameWindow)
     put_text('highest score : ' + str(high_score), snake_colour, screen_width//2, 10, font, gameWindow)
