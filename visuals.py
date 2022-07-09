@@ -43,10 +43,10 @@ def put_text(text, color, x, y, font, gameWindow):
 
 
 def draw_background(gameWindow):
-    sg = pygame.image.load(score_board)
-    gameWindow.blit(sg, (0, 0))
+    # sg = pygame.image.load(score_board)
+    # gameWindow.blit(sg, (0, 0))
     bg = pygame.image.load(game_background)
-    gameWindow.blit(bg, (0, 60))
+    gameWindow.blit(bg, (0, 0))
 
 def game_over_page(gameWindow):
     sg = pygame.image.load(score_board)
