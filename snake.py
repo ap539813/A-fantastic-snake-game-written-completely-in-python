@@ -41,6 +41,7 @@ while not exit_game:
     while start_on:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                start_on = False
                 exit_game = True
 
             if event.type == pygame.KEYDOWN:
